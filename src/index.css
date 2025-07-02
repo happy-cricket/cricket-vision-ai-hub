@@ -2,41 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Cricket Exchange Design System - Premium Sports App */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Background & Text */
+    --background: 210 11% 98%;
+    --foreground: 210 15% 12%;
 
+    /* Cards & Surfaces */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 210 15% 12%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Cricket-themed Primary Colors */
+    --primary: 142 72% 29%;  /* Cricket pitch green */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 142 65% 45%;
+    
+    /* Sky & Premium Colors */
+    --secondary: 210 60% 55%;  /* Sky blue */
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Premium Gold Accents */
+    --accent: 45 93% 58%;  /* Premium gold */
+    --accent-foreground: 210 15% 12%;
+    
+    /* AI/Prediction Colors */
+    --ai-primary: 260 70% 60%;  /* AI purple */
+    --ai-secondary: 280 60% 75%;
+    
+    /* Muted & Supporting */
+    --muted: 210 15% 96%;
+    --muted-foreground: 210 10% 45%;
+    
+    /* Interactive States */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 72% 40%;
+    --warning: 38 92% 50%;
+    
+    /* Borders & Inputs */
+    --border: 210 20% 92%;
+    --input: 210 20% 95%;
+    --ring: 142 72% 29%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(210 50% 65%));
+    --gradient-ai: linear-gradient(135deg, hsl(var(--ai-primary)), hsl(var(--ai-secondary)));
+    --gradient-pitch: linear-gradient(180deg, hsl(142 40% 45%), hsl(142 60% 35%));
+    --gradient-sky: linear-gradient(180deg, hsl(210 80% 70%), hsl(210 60% 55%));
+    
+    /* Shadows */
+    --shadow-elevation: 0 2px 8px hsl(var(--primary) / 0.1);
+    --shadow-premium: 0 8px 32px hsl(var(--accent) / 0.2);
+    --shadow-ai: 0 4px 16px hsl(var(--ai-primary) / 0.3);
+    
+    /* Animations & Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,33 +82,44 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Dark Mode - Sophisticated Cricket Theme */
+    --background: 210 25% 8%;
+    --foreground: 210 5% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --card: 210 20% 12%;
+    --card-foreground: 210 5% 95%;
+    
+    --primary: 142 65% 45%;  /* Brighter green for dark mode */
+    --primary-foreground: 210 25% 8%;
+    --primary-glow: 142 60% 55%;
+    
+    --secondary: 210 70% 65%;  /* Brighter blue for dark mode */
+    --secondary-foreground: 210 25% 8%;
+    
+    --accent: 45 95% 65%;  /* Brighter gold for dark mode */
+    --accent-foreground: 210 25% 8%;
+    
+    --ai-primary: 260 75% 70%;
+    --ai-secondary: 280 65% 80%;
+    
+    --muted: 210 15% 16%;
+    --muted-foreground: 210 8% 65%;
+    
+    --destructive: 0 84% 65%;
+    --destructive-foreground: 210 25% 8%;
+    --success: 142 65% 50%;
+    --warning: 38 92% 60%;
+    
+    --border: 210 15% 20%;
+    --input: 210 15% 16%;
+    --ring: 142 65% 45%;
+    
+    /* Dark Mode Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(210 60% 75%));
+    --gradient-ai: linear-gradient(135deg, hsl(var(--ai-primary)), hsl(var(--ai-secondary)));
+    --gradient-pitch: linear-gradient(180deg, hsl(142 35% 35%), hsl(142 45% 25%));
+    --gradient-sky: linear-gradient(180deg, hsl(210 60% 45%), hsl(210 70% 35%));
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
