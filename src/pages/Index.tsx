@@ -3,11 +3,23 @@ import { LiveMatchCard } from "@/components/LiveMatchCard";
 import { PredictionCard } from "@/components/PredictionCard";
 import { StatsWidget } from "@/components/StatsWidget";
 import { QuickActions } from "@/components/QuickActions";
+import { ApiKeyInput } from "@/components/ApiKeyInput";
 import { Badge } from "@/components/ui/badge";
+import { useApifyData } from "@/hooks/useApifyData";
 
 const Index = () => {
-  // Real FanCode scraped data
-  const upcomingMatches = [
+  const { 
+    matches, 
+    isLoading, 
+    error, 
+    lastFetched, 
+    setApiKey, 
+    refreshData, 
+    hasApiKey 
+  } = useApifyData();
+
+  // Fallback static data when no API key is provided
+  const fallbackMatches = [
     {
       matchId: 118122,
       team1: "Wild Woods Warriors",
@@ -42,6 +54,9 @@ const Index = () => {
       lastUpdated: "20-02-2025 on 1:20:45 PM 🌞"
     }
   ];
+
+  // Use real data from API if available, otherwise use fallback
+  const displayMatches = hasApiKey ? matches : fallbackMatches;
 
   const predictions = [
     {
@@ -126,6 +141,21 @@ const Index = () => {
           </p>
         </div>
 
+        {/* API Configuration */}
+        <div className="mb-8">
+          <ApiKeyInput 
+            onApiKeySet={setApiKey}
+            onRefreshData={refreshData}
+            isLoading={isLoading}
+            lastUpdated={lastFetched}
+          />
+          {error && (
+            <div className="mt-4 p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
+              <p className="text-sm text-destructive">Error: {error}</p>
+            </div>
+          )}
+        </div>
+
         {/* Quick Actions */}
         <div className="mb-12">
           <QuickActions />
@@ -146,19 +176,38 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Upcoming Matches */}
+        {/* Cricket Matches */}
         <div className="mb-12">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-foreground">Upcoming Matches</h2>
-            <Badge className="bg-gradient-primary text-primary-foreground">
-              {upcomingMatches.length} Scheduled
-            </Badge>
+            <h2 className="text-2xl font-bold text-foreground">
+              {hasApiKey ? 'Live Cricket Matches' : 'Cricket Matches'}
+            </h2>
+            <div className="flex items-center gap-2">
+              {hasApiKey && (
+                <Badge className="bg-gradient-ai text-white animate-pulse">
+                  Live Data
+                </Badge>
+              )}
+              <Badge className="bg-gradient-primary text-primary-foreground">
+                {displayMatches.length} Available
+              </Badge>
+            </div>
           </div>
-          <div className="grid lg:grid-cols-2 gap-6">
-            {upcomingMatches.map((match) => (
-              <LiveMatchCard key={match.matchId} {...match} />
-            ))}
-          </div>
+          {displayMatches.length > 0 ? (
+            <div className="grid lg:grid-cols-2 gap-6">
+              {displayMatches.map((match) => (
+                <LiveMatchCard key={match.matchId} {...match} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 text-muted-foreground">
+              {hasApiKey ? (
+                isLoading ? 'Loading matches...' : 'No matches available'
+              ) : (
+                'Enter your Apify API key above to load real-time cricket data'
+              )}
+            </div>
+          )}
         </div>
 
         {/* AI Predictions */}
