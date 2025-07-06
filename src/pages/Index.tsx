@@ -6,31 +6,40 @@ import { QuickActions } from "@/components/QuickActions";
 import { Badge } from "@/components/ui/badge";
 
 const Index = () => {
-  // Mock data for demonstration
-  const liveMatches = [
+  // Real FanCode scraped data
+  const upcomingMatches = [
     {
-      team1: "India",
-      team2: "Australia",
-      team1Score: "234/4 (45.2)",
-      team2Score: "180/8 (50)",
-      currentOver: "45.2",
-      winProbability: 72,
-      momentum: "team1" as const,
-      isLive: true,
-      venue: "Melbourne Cricket Ground",
-      format: "ODI"
+      matchId: 118122,
+      team1: "Wild Woods Warriors",
+      team2: "Hiims Hawks",
+      team1Flag: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/FC-WWD@2x.png",
+      team2Flag: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/FC-HHK@2x.png",
+      eventName: "Chandigarh T20",
+      banner: "https://www.fancode.com/skillup-uploads/cms-media/Chandigarh-T20_ols_v3.jpg",
+      streamLink: "https://dai.google.com/linear/hls/event/6XWI2FtaTVmE9hp3LO3NuQ/master.m3u8",
+      lastUpdated: "20-02-2025 on 1:20:45 PM 🌞"
     },
     {
-      team1: "England",
-      team2: "Pakistan",
-      team1Score: "156/3 (18.4)",
-      team2Score: "142/7 (20)",
-      currentOver: "18.4",
-      winProbability: 68,
-      momentum: "team1" as const,
-      isLive: true,
-      venue: "Lord's Cricket Ground",
-      format: "T20"
+      matchId: 118123,
+      team1: "City Challengers",
+      team2: "Talanoa Tigers",
+      team1Flag: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/FC-CCG@2x.png",
+      team2Flag: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/FC-TAT@2x.png",
+      eventName: "Chandigarh T20",
+      banner: "https://www.fancode.com/skillup-uploads/cms-media/Chandigarh-T20_old_v1.jpg",
+      streamLink: "https://dai.google.com/linear/hls/event/pEZLr3cLR52v0Lb1piiIlA/master.m3u8",
+      lastUpdated: "20-02-2025 on 1:20:45 PM 🌞"
+    },
+    {
+      matchId: 110419,
+      team1: "South Australia",
+      team2: "Tasmania",
+      team1Flag: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/FC-SAUS@2x.png",
+      team2Flag: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/FC-TAS@2x.png",
+      eventName: "Sheffield Shield, 2024-25",
+      banner: "https://www.fancode.com/skillup-uploads/cms-media/110419_4543_SAU_TAS_fc-Web_1739782530681.jpg",
+      streamLink: "https://dai.google.com/linear/hls/event/qYPRpPPWRcqVt2oBWa9ZRw/master.m3u8",
+      lastUpdated: "20-02-2025 on 1:20:45 PM 🌞"
     }
   ];
 
@@ -137,17 +146,17 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Live Matches */}
+        {/* Upcoming Matches */}
         <div className="mb-12">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-foreground">Live Matches</h2>
-            <Badge className="bg-destructive text-destructive-foreground animate-pulse">
-              {liveMatches.length} Live
+            <h2 className="text-2xl font-bold text-foreground">Upcoming Matches</h2>
+            <Badge className="bg-gradient-primary text-primary-foreground">
+              {upcomingMatches.length} Scheduled
             </Badge>
           </div>
           <div className="grid lg:grid-cols-2 gap-6">
-            {liveMatches.map((match, index) => (
-              <LiveMatchCard key={index} {...match} />
+            {upcomingMatches.map((match) => (
+              <LiveMatchCard key={match.matchId} {...match} />
             ))}
           </div>
         </div>
